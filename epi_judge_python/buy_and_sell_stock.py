@@ -5,7 +5,17 @@ from test_framework import generic_test
 
 def buy_and_sell_stock_once(prices: List[float]) -> float:
     # TODO - you fill in here.
-    return 0.0
+    ret = 0.0
+    buy, sell = 0, 1
+    while buy < len(prices)-1:
+        while sell < len(prices) and prices[sell] >= prices[buy]:
+            ret = max(ret, prices[sell] - prices[buy])
+            sell += 1
+        if sell == len(prices) -1:
+            break
+        else:
+            buy = sell
+    return ret
 
 
 if __name__ == '__main__':
