@@ -1,23 +1,39 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
+from collections import namedtuple
 
 
 class Stack:
+    Element = namedtuple('Element', ('val', 'max'))
+
+    def __init__(self):
+        self.stack = []
+
     def empty(self) -> bool:
         # TODO - you fill in here.
-        return True
+        return len(self.stack) == 0
 
     def max(self) -> int:
         # TODO - you fill in here.
-        return 0
+        if self.empty():
+            raise RuntimeError("Stack is empty")
+        else:
+            return self.stack[-1].max
 
     def pop(self) -> int:
         # TODO - you fill in here.
-        return 0
+        if self.empty():
+            raise RuntimeError("Stack is empty")
+        e = self.stack.pop()
+        return e.val
 
     def push(self, x: int) -> None:
         # TODO - you fill in here.
-        return
+        if self.empty():
+            e = Stack.Element(x, x)
+        else:
+            e = Stack.Element(x, max(self.max(), x))
+        self.stack.append(e)
 
 
 def stack_tester(ops):
