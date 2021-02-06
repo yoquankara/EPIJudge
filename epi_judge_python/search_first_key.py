@@ -5,7 +5,18 @@ from test_framework import generic_test
 
 def search_first_of_k(A: List[int], k: int) -> int:
     # TODO - you fill in here.
-    return 0
+    l, r, res = 0, len(A)-1, -1
+    while l <= r:
+        m = l + (r-l)//2
+        if A[m] < k:
+            l = m + 1
+        elif A[m] > k:
+            r = m - 1
+        else:
+            r = m - 1
+            res = m
+
+    return res
 
 
 if __name__ == '__main__':
